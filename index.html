@@ -7,60 +7,85 @@
 <link rel="manifest" href="manifest.json">
 <title>タイ料理・タイ情報レポート</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif; background: #f5f5f5; color: #333; }
-  header { background: linear-gradient(135deg, #c0392b, #e67e22); color: white; padding: 20px 16px 16px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
-  header h1 { font-size: 18px; font-weight: bold; }
-  header p { font-size: 12px; opacity: 0.85; margin-top: 4px; }
-  .tabs { display: flex; background: white; border-bottom: 2px solid #eee; overflow-x: auto; scrollbar-width: none; }
-  .tabs::-webkit-scrollbar { display: none; }
-  .tab { flex: 0 0 auto; padding: 12px 16px; font-size: 13px; cursor: pointer; color: #888; white-space: nowrap; border-bottom: 3px solid transparent; margin-bottom: -2px; }
-  .tab.active { color: #c0392b; border-bottom-color: #c0392b; font-weight: bold; }
-  .content { display: none; padding: 16px; max-width: 600px; margin: 0 auto; }
-  .content.active { display: block; }
-  .section { background: white; border-radius: 12px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
-  .section-header { background: #c0392b; color: white; padding: 10px 14px; font-size: 13px; font-weight: bold; }
-  .item { padding: 12px 14px; border-bottom: 1px solid #f0f0f0; font-size: 14px; line-height: 1.6; }
-  .item:last-child { border-bottom: none; }
-  .item a { display: inline-block; margin-top: 6px; background: #c0392b; color: white; padding: 4px 10px; border-radius: 20px; font-size: 12px; text-decoration: none; }
-  .item a:hover { background: #a93226; }
-  .item strong { color: #c0392b; }
-  .empty { text-align: center; padding: 40px 20px; color: #aaa; }
-  .empty .icon { font-size: 48px; margin-bottom: 12px; }
-  .update-info { text-align: center; font-size: 11px; color: #bbb; padding: 8px; }
-  .flag { margin-right: 6px; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans',sans-serif;background:#f5f5f5;color:#333}
+  header{background:linear-gradient(135deg,#c0392b,#e67e22);color:white;padding:18px 16px 14px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+  header h1{font-size:18px;font-weight:bold}
+  header p{font-size:12px;opacity:.85;margin-top:4px}
+  .tabs{display:flex;background:white;border-bottom:2px solid #eee;overflow-x:auto;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{flex:0 0 auto;padding:12px 16px;font-size:13px;cursor:pointer;color:#888;white-space:nowrap;border-bottom:3px solid transparent;margin-bottom:-2px}
+  .tab.active{color:#c0392b;border-bottom-color:#c0392b;font-weight:bold}
+  .content{display:none;padding:16px;max-width:600px;margin:0 auto}
+  .content.active{display:block}
+  .section{background:white;border-radius:12px;margin-bottom:16px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .section-header{background:#c0392b;color:white;padding:10px 14px;font-size:13px;font-weight:bold}
+  .item{padding:12px 14px;border-bottom:1px solid #f0f0f0;font-size:14px;line-height:1.6}
+  .item:last-child{border-bottom:none}
+  .item-title{font-weight:bold;color:#222}
+  .item-text{margin-top:2px;color:#555}
+  .btn{display:inline-block;margin-top:8px;background:#c0392b;color:white;padding:5px 12px;border-radius:20px;font-size:12px;text-decoration:none}
+  .btn:hover{background:#a93226}
+  .empty{text-align:center;padding:40px 20px;color:#bbb}
+  .empty .icon{font-size:48px;margin-bottom:12px}
+  .footer{text-align:center;font-size:11px;color:#bbb;padding:12px}
+  .summary{background:white;border-radius:12px;padding:14px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.08);font-size:14px;line-height:1.7;color:#444}
 </style>
 </head>
 <body>
 <header>
   <h1>🇹🇭 タイ料理・タイ情報レポート</h1>
-  <p id="report-date">次回更新: 毎月1日</p>
+  <p id="hdr-date">読み込み中...</p>
 </header>
 <div class="tabs">
   <div class="tab active" onclick="showTab(0)">🇯🇵 日本</div>
   <div class="tab" onclick="showTab(1)">🇹🇭 タイ</div>
   <div class="tab" onclick="showTab(2)">🇺🇸 アメリカ</div>
   <div class="tab" onclick="showTab(3)">🌏 ASEAN</div>
+  <div class="tab" onclick="showTab(4)">📝 総評</div>
 </div>
-<div id="tab0" class="content active">
-  <div class="empty"><div class="icon">🍜</div><p>レポートは毎月1日に更新されます</p></div>
-</div>
-<div id="tab1" class="content">
-  <div class="empty"><div class="icon">🛕</div><p>レポートは毎月1日に更新されます</p></div>
-</div>
-<div id="tab2" class="content">
-  <div class="empty"><div class="icon">🗽</div><p>レポートは毎月1日に更新されます</p></div>
-</div>
-<div id="tab3" class="content">
-  <div class="empty"><div class="icon">🌴</div><p>レポートは毎月1日に更新されます</p></div>
-</div>
-<div class="update-info">毎月1日 午前9時（JST）自動更新</div>
+<div id="tab0" class="content active"></div>
+<div id="tab1" class="content"></div>
+<div id="tab2" class="content"></div>
+<div id="tab3" class="content"></div>
+<div id="tab4" class="content"></div>
+<div class="footer">毎月1日 午前9時（JST）自動更新</div>
 <script>
-function showTab(i) {
-  document.querySelectorAll('.tab').forEach((t,j) => t.classList.toggle('active', i===j));
-  document.querySelectorAll('.content').forEach((c,j) => c.classList.toggle('active', i===j));
+function showTab(i){
+  document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('active',i===j));
+  document.querySelectorAll('.content').forEach((c,j)=>c.classList.toggle('active',i===j));
 }
-if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+function items(arr,tab){
+  if(!arr||!arr.length)return'<div class="empty"><div class="icon">📭</div><p>今月は情報なし</p></div>';
+  return arr.map(x=>`<div class="item"><div class="item-title">${x.name||''}</div><div class="item-text">${x.text||''}</div>${x.url?`<a class="btn" href="${x.url}" target="_blank">▶ 記事を見る</a>`:''}</div>`).join('');
+}
+function section(title,arr){
+  return`<div class="section"><div class="section-header">${title}</div>${items(arr)}</div>`;
+}
+function render(d){
+  document.getElementById('hdr-date').textContent=d.generated+' 版';
+  const j=d.japan||{};
+  document.getElementById('tab0').innerHTML=
+    section('新規オープン',j.openings)+
+    section('閉店・移転',j.closings)+
+    section('価格・メニュー情報',j.prices)+
+    section('トレンド・注目情報',j.trends);
+  const th=d.thailand||{};
+  document.getElementById('tab1').innerHTML=
+    section('グルメ・食文化ニュース',th.food_news)+
+    section('観光・ビジネス関連ニュース',th.tourism);
+  const u=d.usa||{};
+  document.getElementById('tab2').innerHTML=
+    section('新規オープン・注目店',u.openings)+
+    section('トレンド',u.trends);
+  const a=d.asean||{};
+  document.getElementById('tab3').innerHTML=
+    section('新規オープン・注目店',a.openings)+
+    section('トレンド',a.trends);
+  document.getElementById('tab4').innerHTML=`<div class="summary">${(d.summary||'').replace(/\n/g,'<br>')}</div>`;
+}
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
 </script>
+<script src="report-data.js?v=1" onload="if(window.REPORT_DATA)render(window.REPORT_DATA)"></script>
 </body>
 </html>
