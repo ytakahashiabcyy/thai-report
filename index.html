@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#c0392b">
+<link rel="manifest" href="manifest.json">
+<title>タイ料理・タイ情報レポート</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif; background: #f5f5f5; color: #333; }
+  header { background: linear-gradient(135deg, #c0392b, #e67e22); color: white; padding: 20px 16px 16px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+  header h1 { font-size: 18px; font-weight: bold; }
+  header p { font-size: 12px; opacity: 0.85; margin-top: 4px; }
+  .tabs { display: flex; background: white; border-bottom: 2px solid #eee; overflow-x: auto; scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { flex: 0 0 auto; padding: 12px 16px; font-size: 13px; cursor: pointer; color: #888; white-space: nowrap; border-bottom: 3px solid transparent; margin-bottom: -2px; }
+  .tab.active { color: #c0392b; border-bottom-color: #c0392b; font-weight: bold; }
+  .content { display: none; padding: 16px; max-width: 600px; margin: 0 auto; }
+  .content.active { display: block; }
+  .section { background: white; border-radius: 12px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .section-header { background: #c0392b; color: white; padding: 10px 14px; font-size: 13px; font-weight: bold; }
+  .item { padding: 12px 14px; border-bottom: 1px solid #f0f0f0; font-size: 14px; line-height: 1.6; }
+  .item:last-child { border-bottom: none; }
+  .item a { display: inline-block; margin-top: 6px; background: #c0392b; color: white; padding: 4px 10px; border-radius: 20px; font-size: 12px; text-decoration: none; }
+  .item a:hover { background: #a93226; }
+  .item strong { color: #c0392b; }
+  .empty { text-align: center; padding: 40px 20px; color: #aaa; }
+  .empty .icon { font-size: 48px; margin-bottom: 12px; }
+  .update-info { text-align: center; font-size: 11px; color: #bbb; padding: 8px; }
+  .flag { margin-right: 6px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🇹🇭 タイ料理・タイ情報レポート</h1>
+  <p id="report-date">次回更新: 毎月1日</p>
+</header>
+<div class="tabs">
+  <div class="tab active" onclick="showTab(0)">🇯🇵 日本</div>
+  <div class="tab" onclick="showTab(1)">🇹🇭 タイ</div>
+  <div class="tab" onclick="showTab(2)">🇺🇸 アメリカ</div>
+  <div class="tab" onclick="showTab(3)">🌏 ASEAN</div>
+</div>
+<div id="tab0" class="content active">
+  <div class="empty"><div class="icon">🍜</div><p>レポートは毎月1日に更新されます</p></div>
+</div>
+<div id="tab1" class="content">
+  <div class="empty"><div class="icon">🛕</div><p>レポートは毎月1日に更新されます</p></div>
+</div>
+<div id="tab2" class="content">
+  <div class="empty"><div class="icon">🗽</div><p>レポートは毎月1日に更新されます</p></div>
+</div>
+<div id="tab3" class="content">
+  <div class="empty"><div class="icon">🌴</div><p>レポートは毎月1日に更新されます</p></div>
+</div>
+<div class="update-info">毎月1日 午前9時（JST）自動更新</div>
+<script>
+function showTab(i) {
+  document.querySelectorAll('.tab').forEach((t,j) => t.classList.toggle('active', i===j));
+  document.querySelectorAll('.content').forEach((c,j) => c.classList.toggle('active', i===j));
+}
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+</script>
+</body>
+</html>
